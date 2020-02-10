@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 //apollo deps
 import { ApolloClient } from "apollo-client";
-// import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
-// import { HttpLink } from "apollo-link-http";
+import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
 import { ApolloProvider } from "@apollo/react-hooks";
 //!apollo deps
 
@@ -12,9 +12,14 @@ import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
 
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: "http://localhost:4000/"
+});
+
 const client = new ApolloClient({
-  //   cache,
-  //   link
+  cache,
+  link
 });
 
 ReactDOM.render(

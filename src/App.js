@@ -1,17 +1,21 @@
 import React from "react";
-import UserDashboard from "./components/users/UserDashboard";
-import AdminDashboard from "./components/admin/AdminDashboard";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import EditProfile from "./components/ProfileForm";
-import "./App.css";
+
+import UserDashboard from "./pages/users/UserDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/Edit" component={EditProfile} />
-        <Route exact path="/dashboard/admin" component={AdminDashboard} />
-        <Route exact path="/dashboard/:id" component={UserDashboard} />
+        <PrivateRoute
+          exact
+          path="/dashboard/admin"
+          component={AdminDashboard}
+        />
+        <PrivateRoute exact path="/dashboard" component={UserDashboard} />
       </Switch>
     </div>
   );
